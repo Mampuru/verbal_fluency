@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
 
   get: ^4.6.1
-  speech_to_text: ^5.4.0
+  speech_to_text: ^6.5.1
   permission_handler: ^11.1.0
   path_provider: ^2.0.8
   audioplayers: ^0.20.1

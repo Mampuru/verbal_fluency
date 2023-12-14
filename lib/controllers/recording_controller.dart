@@ -1,7 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:speech_to_text/speech_to_text.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class RecordingController extends GetxController {
   var isRecording = false.obs;
@@ -27,10 +29,14 @@ class RecordingController extends GetxController {
     if (await Permission.microphone.request().isGranted) {
       await speech?.initialize(
         onStatus: (status) {
-          print('Speech recognition status: $status');
+          if (kDebugMode) {
+            print('Speech recognition status: $status');
+          }
         },
         onError: (error) {
-          print('Error: $error');
+          if (kDebugMode) {
+            print('Error: $error');
+          }
         },
       );
 

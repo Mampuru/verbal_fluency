@@ -15,7 +15,7 @@ class RecordingView extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Voice Recorder'),
+          title: const Text('Voice Recorder'),
         ),
         body: Center(
           child: Column(
@@ -41,7 +41,7 @@ class RecordingView extends StatelessWidget {
                 onPressed: () {
                   controller.playRecording();
                 },
-                child: Text('Play Recording'),
+                child: const Text('Play Recording'),
               ),
             ],
           ),

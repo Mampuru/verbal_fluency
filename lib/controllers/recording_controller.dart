@@ -1,3 +1,8 @@
+import 'package:audioplayers/audioplayers.dart';
+import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:speech_to_text/speech_to_text.dart';
+
 class RecordingController extends GetxController {
   var isRecording = false.obs;
   var transcript = ''.obs;
@@ -15,7 +20,7 @@ class RecordingController extends GetxController {
 
   void initPath() async {
     final appDir = await getApplicationDocumentsDirectory();
-    path = appDir.path + '/recording.wav';
+    path = '${appDir.path}/recording.wav';
   }
 
   void startRecording() async {
@@ -34,7 +39,7 @@ class RecordingController extends GetxController {
           onResult: (result) {
             transcript.value = result.recognizedWords;
           },
-          listenFor: Duration(seconds: 60),
+          listenFor: const Duration(seconds: 60),
         );
         isRecording.value = true;
       }

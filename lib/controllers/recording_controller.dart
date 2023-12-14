@@ -1,0 +1,52 @@
+class RecordingController extends GetxController {
+  var isRecording = false.obs;
+  var transcript = ''.obs;
+  stt.SpeechToText? speech;
+  late String path;
+  late AudioPlayer audioPlayer;
+
+  @override
+  void onInit() {
+    super.onInit();
+    speech = stt.SpeechToText();
+    audioPlayer = AudioPlayer();
+    initPath();
+  }
+
+  void initPath() async {
+    final appDir = await getApplicationDocumentsDirectory();
+    path = appDir.path + '/recording.wav';
+  }
+
+  void startRecording() async {
+    if (await Permission.microphone.request().isGranted) {
+      await speech?.initialize(
+        onStatus: (status) {
+          print('Speech recognition status: $status');
+        },
+        onError: (error) {
+          print('Error: $error');
+        },
+      );
+
+      if (speech?.isAvailable ?? false) {
+        await speech?.listen(
+          onResult: (result) {
+            transcript.value = result.recognizedWords;
+          },
+          listenFor: Duration(seconds: 60),
+        );
+        isRecording.value = true;
+      }
+    }
+  }
+
+  void stopRecording() async {
+    await speech?.stop();
+    isRecording.value = false;
+  }
+
+  Future<void> playRecording() async {
+    await audioPlayer.play(path, isLocal: true);
+  }
+}

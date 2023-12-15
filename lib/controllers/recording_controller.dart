@@ -58,6 +58,6 @@ class RecordingController extends GetxController {
   }
 
   Future<void> playRecording() async {
-    await audioPlayer.play(path, isLocal: true);
+    await audioPlayer.play(path as Source);
   }
 }

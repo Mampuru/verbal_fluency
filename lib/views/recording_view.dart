@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:verbal_fluency/views/result_view.dart';
 
 import '../controllers/recording_controller.dart';
 
@@ -35,9 +36,18 @@ class RecordingView extends StatelessWidget {
             Obx(() => Text(controller.transcript.value)),
             ElevatedButton(
               onPressed: () {
-                controller.playRecording();
+                controller.playRecording(0); // Provide an index to play a specific recording
               },
               child: const Text('Play Recording'),
+            ),
+            Expanded(
+              child: Obx(() => ListView.builder(
+                itemCount: controller.recordings.length,
+                itemBuilder: (context, index) => ScoreDisplay(
+                  recording: controller.recordings[index],
+                  score: controller.scores[index],
+                ),
+              )),
             ),
           ],
         ),

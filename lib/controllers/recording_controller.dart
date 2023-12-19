@@ -62,7 +62,7 @@ class RecordingController extends GetxController {
     isRecording.value = false;
   }
 
-  Future<void> playRecording() async {
+  Future<void> playRecording(int i) async {
     await audioPlayer.play(path as Source);
   }
 

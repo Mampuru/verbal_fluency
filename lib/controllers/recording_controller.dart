@@ -13,6 +13,7 @@ class RecordingController extends GetxController {
   late String path;
   late AudioPlayer audioPlayer;
   var recordings = <String>[].obs; // For storing recordings
+  var scores = <int>[].obs; // For storing scores
 
   @override
   void onInit() {
@@ -21,7 +22,7 @@ class RecordingController extends GetxController {
     audioPlayer = AudioPlayer();
     initPath();
     fetchRecordings(); // Fetch stored recordings on app start
-
+    fetchScores(); // Fetch stored scores on app start
   }
 
   void initPath() async {
@@ -68,5 +69,11 @@ class RecordingController extends GetxController {
   void fetchRecordings() async {
     final prefs = await SharedPreferences.getInstance();
     recordings.assignAll(prefs.getStringList('recordings') ?? []);
+  }
+
+  void fetchScores() async {
+    final prefs = await SharedPreferences.getInstance();
+    scores.assignAll(
+        prefs.getStringList('scores')?.map((score) => int.tryParse(score) ?? 0).toList() ?? []);
   }
 }

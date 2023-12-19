@@ -4,7 +4,7 @@ class ScoreDisplay extends StatelessWidget {
   final String recording;
   final int score;
 
-  const ScoreDisplay({
+  const ScoreDisplay({super.key,
     required this.recording,
     required this.score,
   });

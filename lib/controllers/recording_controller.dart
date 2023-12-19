@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class RecordingController extends GetxController {
@@ -11,6 +12,7 @@ class RecordingController extends GetxController {
   stt.SpeechToText? speech;
   late String path;
   late AudioPlayer audioPlayer;
+  var recordings = <String>[].obs; // For storing recordings
 
   @override
   void onInit() {
@@ -18,6 +20,8 @@ class RecordingController extends GetxController {
     speech = stt.SpeechToText();
     audioPlayer = AudioPlayer();
     initPath();
+    fetchRecordings(); // Fetch stored recordings on app start
+
   }
 
   void initPath() async {
@@ -59,5 +63,10 @@ class RecordingController extends GetxController {
 
   Future<void> playRecording() async {
     await audioPlayer.play(path as Source);
+  }
+
+  void fetchRecordings() async {
+    final prefs = await SharedPreferences.getInstance();
+    recordings.assignAll(prefs.getStringList('recordings') ?? []);
   }
 }

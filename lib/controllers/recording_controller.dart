@@ -51,45 +51,23 @@ class RecordingController extends GetxController {
 
       if (speech?.isAvailable ?? false) {
         isRecording.value = true;
+        setTimer();
         await speech?.listen(
           onResult: (result) {
             transcript.value = result.recognizedWords;
           },
           listenFor: const Duration(seconds: 60),
         );
-
+        stopRecording();
       }
     }
   }
 
-  // void startRecording() async {
-  //   if (await Permission.microphone.request().isGranted) {
-  //     await speech.initialize(
-  //       onStatus: (status) {
-  //         print('Speech recognition status: $status');
-  //       },
-  //       onError: (error) {
-  //         print('Error: $error');
-  //       },
-  //     );
-  //
-  //     if (speech.isAvailable) {
-  //       isRecording.value = true;
-  //       _startTimer();
-  //       await speech.listen(
-  //         onResult: (result) {
-  //           transcript.value = result.recognizedWords;
-  //         },
-  //         listenFor: Duration(seconds: 60),
-  //       );
-  //       stopRecording();
-  //     }
-  //   }
-  // }
-
   void stopRecording() async {
+    _timer?.cancel();
     await speech?.stop();
     isRecording.value = false;
+    timerValue.value = '60';
   }
 
   Future<void> playRecording(int i) async {
@@ -107,5 +85,9 @@ class RecordingController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     scores.assignAll(
         prefs.getStringList('scores')?.map((score) => int.tryParse(score) ?? 0).toList() ?? []);
+  }
+
+  void setTimer() {
+
   }
 }

@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ivisioncorp.verbal_fluency">
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:label="VerbelFlex"
         android:name="${applicationName}"

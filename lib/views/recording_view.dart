@@ -19,7 +19,11 @@ class RecordingView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Obx(() => Text(
-              controller.isRecording.value ? 'Recording...' : 'Not Recording',
+              'Time left: ${controller.timerValue.value} seconds',
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             )),
             ElevatedButton(
               onPressed: () {

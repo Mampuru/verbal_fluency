@@ -51,7 +51,7 @@ class RecordingController extends GetxController {
 
       if (speech?.isAvailable ?? false) {
         isRecording.value = true;
-        setTimer();
+        _startTimer();
         await speech?.listen(
           onResult: (result) {
             transcript.value = result.recognizedWords;
@@ -87,7 +87,17 @@ class RecordingController extends GetxController {
         prefs.getStringList('scores')?.map((score) => int.tryParse(score) ?? 0).toList() ?? []);
   }
 
-  void setTimer() {
-
+  void _startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (timerValue.value == '0') {
+          stopRecording();
+        } else {
+          timerValue.value = (int.parse(timerValue.value) - 1).toString();
+        }
+      },
+    );
   }
 }

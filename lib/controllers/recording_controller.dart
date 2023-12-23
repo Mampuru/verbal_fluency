@@ -34,6 +34,7 @@ class RecordingController extends GetxController {
     path = '${appDir.path}/recording.wav';
   }
 
+  //TODO need to fix the recording stops and to soon
   void startRecording() async {
     if (await Permission.microphone.request().isGranted) {
       await speech?.initialize(
@@ -56,9 +57,9 @@ class RecordingController extends GetxController {
           onResult: (result) {
             transcript.value = result.recognizedWords;
           },
-          listenFor: const Duration(seconds: 60),
+          listenFor: const Duration(minutes: 1),
         );
-        stopRecording();
+        // stopRecording();
       }
     }
   }
@@ -70,6 +71,7 @@ class RecordingController extends GetxController {
     timerValue.value = '60';
   }
 
+  //TODO need to fix the play record doesn't work
   Future<void> playRecording(int i) async {
     print("**************************");
     print(path);

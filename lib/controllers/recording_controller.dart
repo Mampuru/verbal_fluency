@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,8 @@ class RecordingController extends GetxController {
   late AudioPlayer audioPlayer;
   var recordings = <String>[].obs; // For storing recordings
   var scores = <int>[].obs; // For storing scores
+  late Timer? _timer;
+  var timerValue = '60'.obs;
 
   @override
   void onInit() {
@@ -46,16 +50,42 @@ class RecordingController extends GetxController {
       );
 
       if (speech?.isAvailable ?? false) {
+        isRecording.value = true;
         await speech?.listen(
           onResult: (result) {
             transcript.value = result.recognizedWords;
           },
           listenFor: const Duration(seconds: 60),
         );
-        isRecording.value = true;
+
       }
     }
   }
+
+  // void startRecording() async {
+  //   if (await Permission.microphone.request().isGranted) {
+  //     await speech.initialize(
+  //       onStatus: (status) {
+  //         print('Speech recognition status: $status');
+  //       },
+  //       onError: (error) {
+  //         print('Error: $error');
+  //       },
+  //     );
+  //
+  //     if (speech.isAvailable) {
+  //       isRecording.value = true;
+  //       _startTimer();
+  //       await speech.listen(
+  //         onResult: (result) {
+  //           transcript.value = result.recognizedWords;
+  //         },
+  //         listenFor: Duration(seconds: 60),
+  //       );
+  //       stopRecording();
+  //     }
+  //   }
+  // }
 
   void stopRecording() async {
     await speech?.stop();
@@ -63,7 +93,9 @@ class RecordingController extends GetxController {
   }
 
   Future<void> playRecording(int i) async {
-    await audioPlayer.play(path as Source);
+    print("**************************");
+    print(path);
+    await audioPlayer.play(UrlSource(path));
   }
 
   void fetchRecordings() async {

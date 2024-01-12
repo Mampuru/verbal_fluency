@@ -1,0 +1,1 @@
+const logoPath = "asset/logo/speak.png";

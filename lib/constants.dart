@@ -1,1 +1,1 @@
-const logoPath = "asset/logo/speak.png";
+const logoPath = "assets/logo/speak.png";

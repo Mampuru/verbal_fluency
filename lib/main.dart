@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: AnimatedSplashScreen(
+        duration: 3000,
         splash: logoPath,
         nextScreen: RecordingView(),
-        splashTransition: SplashTransition.rotationTransition,
+        splashTransition: SplashTransition.fadeTransition,
       )
     );
   }

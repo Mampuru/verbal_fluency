@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         splash: logoPath,
         nextScreen: RecordingView(),
         splashTransition: SplashTransition.fadeTransition,
+        splashIconSize: 150,
       )
     );
   }

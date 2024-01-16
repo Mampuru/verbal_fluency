@@ -12,7 +12,13 @@ class RecordingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Voice Recorder'),
+        title: const Text(
+          'Voice Recorder',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.black, // Change the app bar color
       ),
       body: Center(
         child: Column(
@@ -21,10 +27,12 @@ class RecordingView extends StatelessWidget {
             Obx(() => Text(
               'Time left: ${controller.timerValue.value} seconds',
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.blue, // Change the text color
               ),
             )),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 if (controller.isRecording.value) {
@@ -33,16 +41,45 @@ class RecordingView extends StatelessWidget {
                   controller.startRecording();
                 }
               },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.green, // Change the button color
+              ),
               child: Obx(
-                    () => Text(controller.isRecording.value ? 'Stop Recording' : 'Start Recording'),
+                    () => Text(
+                  controller.isRecording.value ? 'Stop Recording' : 'Start Recording',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white, // Change the text color
+                  ),
+                ),
               ),
             ),
-            Obx(() => Text(controller.transcript.value)),
+            SizedBox(height: 20),
+            Obx(() => Text(
+              controller.transcript.value,
+              style: TextStyle(
+                fontSize: 18,
+                fontStyle: FontStyle.italic,
+                color: Colors.grey, // Change the text color
+              ),
+            )),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 controller.playRecording(0); // Provide an index to play a specific recording
               },
-              child: const Text('Play Recording'),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.orange, // Change the button color
+              ),
+              child: const Text(
+                'Play Recording',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white, // Change the text color
+                ),
+              ),
             ),
             Expanded(
               child: Obx(() => ListView.builder(

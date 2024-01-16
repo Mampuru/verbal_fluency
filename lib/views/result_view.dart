@@ -4,16 +4,54 @@ class ScoreDisplay extends StatelessWidget {
   final String recording;
   final int score;
 
-  const ScoreDisplay({super.key,
+  const ScoreDisplay({
+    Key? key,
     required this.recording,
     required this.score,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(recording),
-      subtitle: Text('Score: $score'),
+    return Card(
+      elevation: 3,
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              recording,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                  size: 20,
+                ),
+                SizedBox(width: 4),
+                Text(
+                  'Score: $score',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

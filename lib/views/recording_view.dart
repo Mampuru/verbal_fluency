@@ -32,7 +32,7 @@ class RecordingView extends StatelessWidget {
                 color: Colors.blue, // Change the text color
               ),
             )),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 if (controller.isRecording.value) {
@@ -42,12 +42,12 @@ class RecordingView extends StatelessWidget {
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.green, // Change the button color
+                backgroundColor: Colors.green, // Change the button color
               ),
               child: Obx(
                     () => Text(
                   controller.isRecording.value ? 'Stop Recording' : 'Start Recording',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.white, // Change the text color
@@ -55,22 +55,22 @@ class RecordingView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Obx(() => Text(
               controller.transcript.value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontStyle: FontStyle.italic,
                 color: Colors.grey, // Change the text color
               ),
             )),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 controller.playRecording(0); // Provide an index to play a specific recording
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.orange, // Change the button color
+                backgroundColor: Colors.orange, // Change the button color
               ),
               child: const Text(
                 'Play Recording',

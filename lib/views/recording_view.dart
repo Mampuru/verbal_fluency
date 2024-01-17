@@ -18,7 +18,6 @@ class RecordingView extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.black, // Change the app bar color
       ),
       body: Center(
         child: Column(

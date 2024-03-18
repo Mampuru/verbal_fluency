@@ -1,4 +1,7 @@
 # VerbelFlex
+
+[![My Skills](https://skillicons.dev/icons?i=flutter,dart)](https://skillicons.dev)
+
 VerbelFlex application assist you in achieve verbal fluency by practicing words on a daily basis.
 
 ## Feature
